@@ -32,7 +32,7 @@ Spesifikasi lengkap ada di `docs/blueprint-eskristal.md` — **baca file itu seb
 Bangun per fase sesuai roadmap blueprint (Bagian 10):
 
 1. **Fase 1** — skema database (`setup/schema.sql`) + struktur folder
-2. **Fase 2** — web dashboard (login, dashboard stok, riwayat, input manual, kelola pekerja, pengaturan, laporan + export)
+2. **Fase 2** — web dashboard (login, dashboard stok, riwayat, input manual, kelola pekerja, pengaturan, laporan + export) 
 3. **Fase 3** — WA bot (webhook handler, parsing perintah, validasi, balasan)
 4. **Fase 4** — sinkronisasi Google Sheets (`sync/sync_eskristal.py` + cron)
 5. **Fase 5** — testing & hardening
