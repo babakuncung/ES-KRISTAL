@@ -1,0 +1,4 @@
+# Sinkronisasi ESKRISTAL ke Google Sheets — tiap 10 menit
+# Pasang di server: sudo cp sync/eskristal.cron /etc/cron.d/eskristal
+#                   sudo chmod 644 /etc/cron.d/eskristal
+*/10 * * * * www-data /usr/bin/python3 /var/www/eskristal/sync/sync_eskristal.py >> /var/log/eskristal-sync.log 2>&1
