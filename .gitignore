@@ -1,0 +1,19 @@
+# Kredensial & konfigurasi — JANGAN PERNAH masuk git
+config/.env
+sync/service-account.json
+*.key
+*.pem
+
+# Dependencies
+vendor/
+node_modules/
+
+# Log, upload, session
+*.log
+public/uploads/*
+!public/uploads/.gitkeep
+waha-session/
+
+# OS
+.DS_Store
+Thumbs.db
