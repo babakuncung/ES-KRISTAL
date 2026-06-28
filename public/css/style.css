@@ -1,0 +1,260 @@
+/* ============================================================
+   ESKRISTAL — Mobile-first Admin CSS
+   ============================================================ */
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --blue:   #1a3a5c;
+  --blue2:  #2563eb;
+  --gray:   #64748b;
+  --gray-l: #f1f5f9;
+  --white:  #ffffff;
+  --red:    #dc2626;
+  --green:  #16a34a;
+  --border: #e2e8f0;
+  --radius: 8px;
+  --shadow: 0 1px 3px rgba(0,0,0,.12);
+}
+
+body {
+  font-family: system-ui, -apple-system, sans-serif;
+  font-size: 15px;
+  background: var(--gray-l);
+  color: #1e293b;
+  min-height: 100vh;
+}
+
+/* ── Topbar ──────────────────────────────────────────────── */
+.topbar {
+  background: var(--blue);
+  color: var(--white);
+  display: flex;
+  align-items: center;
+  padding: 0 1rem;
+  height: 56px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+.topbar .brand { font-weight: 700; font-size: 1.1rem; flex: 1; }
+.topbar .menu-btn {
+  background: none; border: none; color: var(--white);
+  font-size: 1.5rem; cursor: pointer; padding: .25rem .5rem;
+}
+
+/* ── Sidebar ─────────────────────────────────────────────── */
+.sidebar {
+  background: var(--blue);
+  width: 220px;
+  min-height: calc(100vh - 56px);
+  position: fixed;
+  top: 56px;
+  left: -220px;
+  transition: left .25s ease;
+  z-index: 90;
+  padding-top: .5rem;
+}
+.sidebar.open { left: 0; }
+.sidebar a {
+  display: block;
+  color: #cbd5e1;
+  text-decoration: none;
+  padding: .75rem 1.25rem;
+  font-size: .95rem;
+}
+.sidebar a:hover, .sidebar a.active {
+  background: rgba(255,255,255,.12);
+  color: var(--white);
+}
+.sidebar .nav-label {
+  color: #94a3b8;
+  font-size: .75rem;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+  padding: 1rem 1.25rem .35rem;
+}
+
+/* Overlay saat sidebar terbuka */
+.sidebar-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.4);
+  z-index: 80;
+}
+.sidebar-overlay.show { display: block; }
+
+/* ── Main content ────────────────────────────────────────── */
+.main {
+  padding: 1.25rem 1rem;
+  /* Desktop: beri margin kiri sebesar sidebar */
+}
+.page-title {
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  color: var(--blue);
+}
+
+/* ── Kartu ───────────────────────────────────────────────── */
+.cards { display: grid; gap: .75rem; grid-template-columns: 1fr; }
+.card {
+  background: var(--white);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 1rem 1.25rem;
+}
+.card .label { font-size: .8rem; color: var(--gray); margin-bottom: .25rem; }
+.card .value { font-size: 1.6rem; font-weight: 700; }
+.card.green .value { color: var(--green); }
+.card.red   .value { color: var(--red); }
+.card.blue  .value { color: var(--blue2); }
+
+/* ── Tabel ───────────────────────────────────────────────── */
+.table-wrap { overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; background: var(--white); border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); }
+th { background: var(--blue); color: var(--white); text-align: left; padding: .65rem .75rem; font-size: .82rem; font-weight: 600; }
+td { padding: .6rem .75rem; border-bottom: 1px solid var(--border); font-size: .88rem; vertical-align: middle; }
+tr:last-child td { border-bottom: none; }
+tr:hover td { background: #f8fafc; }
+
+/* ── Form ────────────────────────────────────────────────── */
+.form-group { margin-bottom: 1rem; }
+.form-group label { display: block; font-size: .85rem; font-weight: 600; margin-bottom: .35rem; }
+.form-group input,
+.form-group select,
+.form-group textarea {
+  width: 100%; padding: .6rem .75rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  font-size: .95rem;
+  background: var(--white);
+}
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: var(--blue2);
+  box-shadow: 0 0 0 3px rgba(37,99,235,.15);
+}
+.form-hint { font-size: .78rem; color: var(--gray); margin-top: .3rem; }
+
+/* ── Tombol ──────────────────────────────────────────────── */
+.btn {
+  display: inline-block;
+  padding: .55rem 1.1rem;
+  border-radius: var(--radius);
+  border: none;
+  font-size: .9rem;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: none;
+  text-align: center;
+}
+.btn-primary  { background: var(--blue2); color: var(--white); }
+.btn-danger   { background: var(--red);   color: var(--white); }
+.btn-outline  { background: transparent; border: 1px solid var(--border); color: var(--blue); }
+.btn-sm       { padding: .35rem .7rem; font-size: .82rem; }
+.btn:hover    { opacity: .88; }
+
+/* ── Alert ───────────────────────────────────────────────── */
+.alert {
+  padding: .75rem 1rem;
+  border-radius: var(--radius);
+  margin-bottom: 1rem;
+  font-size: .9rem;
+}
+.alert-ok  { background: #dcfce7; color: #166534; }
+.alert-err { background: #fee2e2; color: #991b1b; }
+
+/* ── Badge ───────────────────────────────────────────────── */
+.badge {
+  display: inline-block;
+  padding: .2rem .55rem;
+  border-radius: 99px;
+  font-size: .75rem;
+  font-weight: 600;
+}
+.badge-green  { background: #dcfce7; color: #166534; }
+.badge-red    { background: #fee2e2; color: #991b1b; }
+.badge-gray   { background: #f1f5f9; color: var(--gray); }
+.badge-blue   { background: #dbeafe; color: #1d4ed8; }
+
+/* ── Login page ──────────────────────────────────────────── */
+.login-wrap {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--blue);
+  padding: 1rem;
+}
+.login-box {
+  background: var(--white);
+  border-radius: 12px;
+  padding: 2rem 1.5rem;
+  width: 100%;
+  max-width: 380px;
+  box-shadow: 0 8px 24px rgba(0,0,0,.2);
+}
+.login-box h1 { font-size: 1.3rem; color: var(--blue); margin-bottom: .25rem; }
+.login-box .sub { color: var(--gray); font-size: .85rem; margin-bottom: 1.5rem; }
+
+/* ── Filter bar ──────────────────────────────────────────── */
+.filter-bar {
+  background: var(--white);
+  border-radius: var(--radius);
+  padding: .75rem 1rem;
+  margin-bottom: 1rem;
+  box-shadow: var(--shadow);
+  display: flex;
+  flex-wrap: wrap;
+  gap: .5rem;
+  align-items: flex-end;
+}
+.filter-bar .form-group { margin-bottom: 0; flex: 1; min-width: 130px; }
+.filter-bar label { font-size: .78rem; }
+
+/* ── Paginasi ────────────────────────────────────────────── */
+.pagination { display: flex; gap: .4rem; flex-wrap: wrap; margin-top: 1rem; }
+.pagination a, .pagination span {
+  padding: .4rem .7rem;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  font-size: .85rem;
+  text-decoration: none;
+  color: var(--blue2);
+  background: var(--white);
+}
+.pagination .current { background: var(--blue2); color: var(--white); border-color: var(--blue2); }
+
+/* ── Chart wrapper ───────────────────────────────────────── */
+.chart-wrap {
+  background: var(--white);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 1rem;
+  margin-bottom: 1rem;
+}
+.chart-wrap h3 { font-size: .9rem; color: var(--gray); margin-bottom: .75rem; }
+
+/* ── Desktop (≥ 768px) ───────────────────────────────────── */
+@media (min-width: 768px) {
+  .menu-btn { display: none; }
+  .sidebar  { left: 0; }
+  .sidebar-overlay { display: none !important; }
+  .main     { margin-left: 220px; padding: 1.5rem 2rem; }
+  .cards    { grid-template-columns: repeat(3, 1fr); }
+}
+
+/* ── Print (laporan PDF via browser) ─────────────────────── */
+@media print {
+  .topbar, .sidebar, .sidebar-overlay,
+  .no-print, .filter-bar, .pagination, .btn { display: none !important; }
+  .main { margin: 0; padding: 0; }
+  body, table, .card { box-shadow: none !important; }
+  table { font-size: 11pt; }
+  .print-only { display: block !important; }
+}
+.print-only { display: none; }
