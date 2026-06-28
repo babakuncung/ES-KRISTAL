@@ -1,0 +1,5 @@
+# Backup MySQL eskristal — tiap hari jam 02:00
+# Pasang di server:
+#   sudo cp setup/backup.cron /etc/cron.d/eskristal-backup
+#   sudo chmod 644 /etc/cron.d/eskristal-backup
+0 2 * * * root /var/www/eskristal/setup/backup.sh >> /var/log/eskristal-backup.log 2>&1

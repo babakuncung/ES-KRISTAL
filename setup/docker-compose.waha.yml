@@ -1,0 +1,25 @@
+# WAHA (WhatsApp HTTP API) — Docker Compose
+# Jalankan: docker compose -f setup/docker-compose.waha.yml up -d
+#
+# Sebelum jalan:
+#   1. Isi WHATSAPP_API_KEY di config/.env
+#   2. docker compose -f setup/docker-compose.waha.yml up -d
+#   3. Buka http://server:3000/dashboard → scan QR Code
+#   4. Sesi tersimpan di volume, tidak perlu scan ulang setelah restart
+
+services:
+  waha:
+    image: devlikeapro/waha:latest
+    container_name: waha-eskristal
+    restart: always
+    ports:
+      - "127.0.0.1:3000:3000"   # bind ke localhost — akses dari luar via Nginx jika perlu
+    environment:
+      WHATSAPP_API_KEY: "${WAHA_API_KEY}"
+      WHATSAPP_DEFAULT_ENGINE: WEBJS
+    volumes:
+      - waha-sessions:/app/.sessions   # sesi WA persisten — scan QR cukup sekali
+
+volumes:
+  waha-sessions:
+    driver: local

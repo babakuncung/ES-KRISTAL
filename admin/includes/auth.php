@@ -52,6 +52,19 @@ function login_user(string $username, string $password): bool {
     $user = $stmt->fetch();
 
     if (!$user || !$user['aktif']) return false;
+
+    // Rate limit: blokir setelah 5 gagal dalam 5 menit
+    $stmt_rl = db()->prepare(
+        "SELECT COUNT(*) FROM activity_log
+         WHERE aktor = ? AND aksi = 'login_gagal'
+           AND created_at > DATE_SUB(NOW(), INTERVAL 5 MINUTE)"
+    );
+    $stmt_rl->execute([trim($username)]);
+    if ((int)$stmt_rl->fetchColumn() >= 5) {
+        log_activity(trim($username), 'login_blokir', 'Terlalu banyak percobaan gagal');
+        return false;
+    }
+
     if (!password_verify($password, $user['password_hash'])) return false;
 
     $token = bin2hex(random_bytes(32));
@@ -68,7 +81,7 @@ function login_user(string $username, string $password): bool {
     setcookie(COOKIE_NAME, $token, [
         'expires'  => time() + SESSION_LIFETIME,
         'path'     => '/',
-        'secure'   => false,   // set true di production (HTTPS)
+        'secure'   => (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off'),
         'httponly' => true,
         'samesite' => 'Strict',
     ]);
